@@ -8,7 +8,7 @@ const app = express();
 // compile sass
 try {
   const styleFilePath = "public/style.css";
-  const style = sass.compile("scss/style.scss");
+  const style = sass.compile("sass/main.scss");
   fs.writeFileSync(styleFilePath, style.css.toString());
   console.log("The file " + styleFilePath + " was created successfully.");
 } catch (err) {
