@@ -1,13 +1,20 @@
+// sass variables, mixins, functions, placeholders, etc..
 @import "abstracts";
 
+// reset, typography, sitewide css
 @import "base";
 
+// small components: buttons, dropdown, etc..
 @import "components";
 
+// layouts: header, footer, forms styling, etc...
 @import "layout";
 
+// page specific styling: home, login, signin, profile, etc...
 @import "pages";
 
+// different color themes for the website (light/dark ?) and for events (christmas, etc..)
 @import "themes";
 
+// css libraries and css code from others
 @import "vendors";
