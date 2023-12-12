@@ -1,0 +1,107 @@
+<%- include('partials/header'); -%>
+
+<form action="/addJob">
+    <h2>Add a job</h2>
+    <label for="jobTitle">Job Title</label>
+    <input type="text" name="jobTitle" required /><br>
+    <div class="jobTitle error"></div><br>
+    <label for="website">Website</label>
+    <input type="url" name="website"/>
+    <div class="website error"></div><br>
+    <label for="contactName">Contact Name</label>
+    <input type="text" name="contactName"/>
+    <div class="contactName error"></div><br>
+    <label for="contactEmail">Contact Email</label>
+    <input type="email" name="contactEmail"/>
+    <div class="contactEmail error"></div><br>
+    <label for="contactPhone">Contact Phone</label>
+    <input type="number" name="contactPhone"/>
+    <div class="contactPhone error"></div><br>
+    <label for="address">Address</label>
+    <input type="text" name="address"/>
+    <div class="address error"></div><br>
+    <label for="origin">Origin</label>
+    <select name="origin">
+        <option value="candidatureSpontanee">Candidature Spontanée</option>
+        <option value="jobOffer">Job Offer</option>
+    </select>
+    <div class="origin error"></div><br>
+    <label for="status">Status</label>
+    <select name="status">
+        <option value="interested">Interested</option>
+        <option value="cvSent">CV sent</option>
+        <option value="negative">Negative</option>
+        <option value="Interview">Interview</option>
+    </select>
+    <div class="status error"></div><br>
+    <label for="comments">Comments</label>
+    <input type="text" name="comments"/>
+    <div class="comments error"></div><br>
+    <button>Save</button>
+</form>
+
+<%- include('partials/footer'); -%>
+
+<script>
+    const form = document.querySelector('form');
+    const jobTitleError = document.querySelector('.jobTitle.error');
+    const websiteError = document.querySelector('.website.error');
+    const contactNameError = document.querySelector('.contactName.error');
+    const contactEmailError = document.querySelector('.contactEmail.error');
+    const contactPhoneError = document.querySelector('.contactPhone.error');
+    const addressError = document.querySelector('.address.error');
+    const originError = document.querySelector('.origin.error');
+    const statusError = document.querySelector('.status.error');
+    const commentsError = document.querySelector('.comments.error');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        jobTitleError.textContent = '';
+        websiteError.textContent = '';
+        contactNameError.textContent = '';
+        contactEmailError.textContent = '';
+        contactPhoneError.textContent = '';
+        addressError.textContent = '';
+        originError.textContent = '';
+        statusError.textContent = '';
+        commentsError.textContent = '';
+
+        const jobTitle = form.jobTitle.value;
+        const website = form.website.value;
+        const contactName = form.contactName.value;
+        const contactEmail = form.contactEmail.value;
+        const contactPhone = form.contactPhone.value;
+        const address = form.address.value;
+        const origin = form.origin.value;
+        const status = form.status.value;
+        const comments = form.comments.value;
+
+            try {
+                const res = await fetch('/addJob', {
+                    method: 'POST',
+                    body: JSON.stringify({ jobTitle, website, contactName, contactEmail, contactPhone, address, origin, status, comments }),
+                    headers: {'Content-Type': 'application/json'}
+                });
+                const data = await res.json();
+                console.log(data);
+                if (data.errors) {
+                    jobTitleError.textContent = data.errors.jobTitle;
+                    websiteError.textContent = data.errors.website;
+                    contactNameError.textContent = data.errors.contactName;
+                    contactEmailError.textContent = data.errors.contactEmail;
+                    contactPhoneError.textContent = data.errors.contactPhone;
+                    addressError.textContent = data.errors.address;
+                    originError.textContent = data.errors.origin;
+                    statusError.textContent = data.errors.status;
+                    commentsError.textContent = data.errors.comments;
+
+                } else {
+                    location.assign('/');
+                }
+            }
+            catch (err) {
+                console.log(err);
+            }
+    });
+</script>

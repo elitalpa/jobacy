@@ -1,7 +1,25 @@
 <%- include('partials/header'); -%>
+<% if (jobs.length > 0) { %>
+    <h2>Your ongoing job applications:</h2>
 
-<h2>Your ongoing job applications:</h2>
+    <%    for(var i=0; i < jobs.length; i++) { %>
 
-<p> applications will come here</p>
+    <div class="job">
+        Job Title: <%= jobs[i].jobTitle %><br>
+        Website: <%= jobs[i].website %><br>
+        Contact Name: <%= jobs[i].contactName %><br>
+        Contact Email: <%= jobs[i].contactEmail %><br>
+        Contact Phone: <%= jobs[i].contactPhone %><br>
+        Address: <%= jobs[i].address %><br>
+        Origin: <%= jobs[i].origin %><br>
+        Status: <%= jobs[i].status %><br>
+        Comments: <%= jobs[i].comments %>
+    </div>
+
+    <br>
+<% } } else { %>
+    <h2>Let's start tracking your first job application</h2>
+<% } %>
+<a href="/addJob">Add a job</a>
 
 <%- include('partials/footer'); -%>
