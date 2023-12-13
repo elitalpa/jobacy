@@ -1,0 +1,10 @@
+<%- include('partials/header'); -%>
+
+<h1>My Profile</h1>
+<ul>
+    <li>First name: <%= user.firstName %></li>
+    <li>Last name: <%= user.lastName %></li>
+    <li>Email: <%= user.email %></li>
+    <li>gitHub: <a href="https://github.com/<%= user.gitHub %>">github.com/<%= user.gitHub %></a></li>
+</ul>
+<%- include('partials/footer'); -%>

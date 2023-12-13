@@ -1,14 +1,18 @@
+require("dotenv").config();
 const fs = require("node:fs");
-const express = require("express");
 const sass = require("sass");
-// const routes = require("./routes/routes");
+const express = require("express");
+const mongoose = require("mongoose");
+const authRoutes = require("./routes/authRoutes");
+const cookieParser = require("cookie-parser");
+const { requireAuth, checkUser } = require("./middleware/authMiddleware");
 
 const app = express();
 
 // compile sass
 try {
-  const styleFilePath = "public/style.css";
-  const style = sass.compile("scss/style.scss");
+  const styleFilePath = __dirname + "/public/styles.css";
+  const style = sass.compile(__dirname + "/scss/main.scss");
   fs.writeFileSync(styleFilePath, style.css.toString());
   console.log("The file " + styleFilePath + " was created successfully.");
 } catch (err) {
@@ -17,24 +21,38 @@ try {
 }
 
 // middleware
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 app.use(express.json());
+app.use(cookieParser());
 
 // view engine
+app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
 
-const port = 3000;
-app.listen(port);
+const PORT = process.env.PORT || 3000;
+
+const dbURI = process.env.MONGODB_URI;
+mongoose
+  .connect(dbURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
+  .then((result) => {
+    app.listen(PORT);
+    console.log(`Listening on port ` + PORT);
+  })
+  .catch((err) => {
+    console.log(err);
+    app.listen(PORT);
+    console.log(`Listening on port ` + PORT);
+  });
 
 // routes
-app.get("/", (req, res) => res.render("home"));
-app.get("/login", (req, res) => res.render("login"));
-app.get("/signup", (req, res) => res.render("signup"));
-app.get("/dashboard", (req, res) => res.render("dashboard"));
+app.get("*", checkUser);
+app.get("/", (req, res) => res.render("landing-page"));
+app.get("/", requireAuth, (req, res) => res.render("home"));
+app.get("/myProfile", requireAuth, (req, res) => res.render("myProfile"));
+app.use(authRoutes);
 
-// app.use(routes);
-
-// error custom
-app.use((req, res) => {
-  res.status(404).render("404");
-});
+module.exports = app;
