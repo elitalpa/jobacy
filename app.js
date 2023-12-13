@@ -29,6 +29,23 @@ app.use(cookieParser());
 app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
 
+function getAppRoutes() {
+  // routes
+  app.get("*", checkUser);
+  app.get("/", (req, res) => res.render("landing-page"));
+  app.get("/", requireAuth, (req, res) => res.render("home"));
+  app.get("/myProfile", requireAuth, (req, res) => res.render("myProfile"));
+  app.use(authRoutes);
+}
+
+function getErrorRoutes() {
+  app.get("/", (req, res) => res.render("landing-page"));
+
+  app.use((req, res) => {
+    res.status(500).render("error");
+  });
+}
+
 const PORT = process.env.PORT || 3000;
 
 const dbURI = process.env.MONGODB_URI;
@@ -41,18 +58,15 @@ mongoose
   .then((result) => {
     app.listen(PORT);
     console.log(`Listening on port ` + PORT);
+
+    getAppRoutes();
   })
   .catch((err) => {
     console.log(err);
     app.listen(PORT);
     console.log(`Listening on port ` + PORT);
-  });
 
-// routes
-app.get("*", checkUser);
-app.get("/", (req, res) => res.render("landing-page"));
-app.get("/", requireAuth, (req, res) => res.render("home"));
-app.get("/myProfile", requireAuth, (req, res) => res.render("myProfile"));
-app.use(authRoutes);
+    getErrorRoutes();
+  });
 
 module.exports = app;
