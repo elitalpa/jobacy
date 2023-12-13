@@ -3,3 +3,9 @@ node_modules/
 
 # never push .env file
 .env
+
+# MacOS
+.DS_Store
+
+# JetBrains WebStorm
+.idea/
