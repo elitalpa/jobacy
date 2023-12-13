@@ -17,14 +17,16 @@ try {
 }
 
 // middleware
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 app.use(express.json());
 
 // view engine
+app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
 
-const port = 3000;
-app.listen(port);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT);
+console.log(`Listening on port ` + PORT);
 
 // routes
 app.get("/", (req, res) => res.render("home"));
@@ -38,3 +40,5 @@ app.get("/dashboard", (req, res) => res.render("dashboard"));
 app.use((req, res) => {
   res.status(404).render("404");
 });
+
+module.exports = app;
