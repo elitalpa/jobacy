@@ -1,4 +1,6 @@
 require("dotenv").config();
+const fs = require("node:fs");
+const sass = require("sass");
 const express = require("express");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
@@ -41,19 +43,14 @@ mongoose
     console.log(`Listening on port ` + PORT);
   })
   .catch((err) => {
+    console.log(err);
     app.listen(PORT);
     console.log(`Listening on port ` + PORT);
-    console.log(err);
-    app.get("*", (req, res) => res.redirect("/error"));
   });
-
-// error page when DB is not connected
-app.get("/error", (req, res) => {
-  res.render("error");
-});
 
 // routes
 app.get("*", checkUser);
+app.get("/", (req, res) => res.render("landing-page"));
 app.get("/", requireAuth, (req, res) => res.render("home"));
 app.get("/myProfile", requireAuth, (req, res) => res.render("myProfile"));
 app.use(authRoutes);
