@@ -8,10 +8,10 @@ a {
     text-decoration: none;
 }
 
-#save {
+#save, #cancel {
     display: none;
 }
 
-.updateJob input, .updateJob textarea {
+.editJob input, .editJob textarea {
     border: 0;
 }

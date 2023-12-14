@@ -11,7 +11,7 @@
 <input id="origin" type="text" name="origin" value="<%= job.origin || 'origin'%>" readonly /><br>
 <input id="status" type="text" name="status" value="<%= job.status || 'status'%>" readonly /><br>
 <textarea id="comments" name="comments" rows="10" cols="50" readonly ><%= job.comments || 'comments'%></textarea><br>
-<button id="edit">Edit</button><button id="save">Save</button><button id="delete">Delete</button>
+<button id="edit">Edit</button><button id="save">Save</button><button id="delete">Delete</button><button id="cancel">Cancel</button>
 
 </form>
 
@@ -19,55 +19,76 @@
 
 <script>
     const form = document.querySelector('form');
-    const jobTitle = document.getElementById('jobTitle');
-    const companyName = document.getElementById('companyName');
-    const website = document.getElementById('website');
-    const contactName = document.getElementById('contactName');
-    const contactEmail = document.getElementById('contactEmail');
-    const contactPhone = document.getElementById('contactPhone');
-    const address = document.getElementById('address');
-    const origin = document.getElementById('origin');
-    const status = document.getElementById('status');
-    const comments = document.getElementById('comments');
     const editBtn = document.getElementById('edit');
     const saveBtn = document.getElementById('save');
-    const deleteBtn = document.getElementById('delete');
+    const deleteBtn = document.getElementById('delete')
+    const cancelBtn = document.getElementById('cancel')
+
+    const jobTitleElement = form.jobTitle;
+    const companyNameElement = form.companyName;
+    const websiteElement = form.website;
+    const contactNameElement = form.contactName;
+    const contactEmailElement = form.contactEmail;
+    const contactPhoneElement = form.contactPhone;
+    const addressElement = form.address;
+    const originElement = form.origin;
+    const statusElement = form.status;
+    const commentsElement = form.comments;
 
     editBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        jobTitle.removeAttribute('readonly');
-        companyName.removeAttribute('readonly');
-        website.removeAttribute('readonly');
-        contactName.removeAttribute('readonly');
-        contactEmail.removeAttribute('readonly');
-        contactPhone.removeAttribute('readonly');
-        address.removeAttribute('readonly');
-        origin.removeAttribute('readonly');
-        status.removeAttribute('readonly');
-        comments.removeAttribute('readonly');
+        jobTitleElement.removeAttribute('readonly');
+        companyNameElement.removeAttribute('readonly');
+        websiteElement.removeAttribute('readonly');
+        contactNameElement.removeAttribute('readonly');
+        contactEmailElement.removeAttribute('readonly');
+        contactPhoneElement.removeAttribute('readonly');
+        addressElement.removeAttribute('readonly');
+        originElement.removeAttribute('readonly');
+        statusElement.removeAttribute('readonly');
+        commentsElement.removeAttribute('readonly');
 
-        jobTitle.style.border = "solid 1px";
-        companyName.style.border = "solid 1px";
-        website.style.border = "solid 1px";
-        contactName.style.border = "solid 1px";
-        contactEmail.style.border = "solid 1px";
-        contactPhone.style.border = "solid 1px";
-        address.style.border = "solid 1px";
-        origin.style.border = "solid 1px";
-        status.style.border = "solid 1px";
-        comments.style.border = "solid 1px";
+        jobTitleElement.style.border = "solid 1px";
+        companyNameElement.style.border = "solid 1px";
+        websiteElement.style.border = "solid 1px";
+        contactNameElement.style.border = "solid 1px";
+        contactEmailElement.style.border = "solid 1px";
+        contactPhoneElement.style.border = "solid 1px";
+        addressElement.style.border = "solid 1px";
+        originElement.style.border = "solid 1px";
+        statusElement.style.border = "solid 1px";
+        commentsElement.style.border = "solid 1px";
 
-        editBtn.style.display = "none"
-        saveBtn.style.display = "inline-block"
+        editBtn.style.display = "none";
+        deleteBtn.style.display = "none";
+        saveBtn.style.display = "inline-block";
+        cancelBtn.style.display = "inline-block";
     });
 
-    saveBtn.addEventListener('click', (e) => {
+    saveBtn.addEventListener('click', async (e) => {
         e.preventDefault();
-        location.reload();
+
+        const jobTitle = form.jobTitle.value;
+        const companyName = form.companyName.value;
+        const website = form.website.value;
+        const contactName = form.contactName.value;
+        const contactEmail = form.contactEmail.value;
+        const contactPhone = form.contactPhone.value;
+        const address = form.address.value;
+        const origin = form.origin.value;
+        const status = form.status.value;
+        const comments = form.comments.value;
+
+        location.reload()
     });
 
     deleteBtn.addEventListener('click', (e) => {
         e.preventDefault();
+    });
+
+    cancelBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = `/dashboard`;
     });
 
     </script>

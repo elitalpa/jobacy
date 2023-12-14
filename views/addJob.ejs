@@ -79,8 +79,8 @@
         const contactEmail = form.contactEmail.value;
         const contactPhone = form.contactPhone.value;
         const address = form.address.value;
-        const origin = form.origin.value;
-        const status = form.status.value;
+        const origin = form.origin.options[form.origin.selectedIndex].text;
+        const status = form.status.options[form.status.selectedIndex].text;
         const comments = form.comments.value;
 
             try {
