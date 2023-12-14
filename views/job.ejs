@@ -1,0 +1,73 @@
+<%- include('partials/header'); -%>
+
+<form class="editJob" action="/editJob">
+<input id="jobTitle" type="text" name="jobTitle" value="<%= job.jobTitle || 'Job Title'%>" readonly required /><br>
+<input id="companyName" type="text" name="companyName" value="<%= job.companyName || 'Company Name'%>" readonly required /><br>
+<input id="website" type="text" name="website" value="<%= job.website || 'website' %>" readonly /><br>
+<input id="contactName" type="text" name="contactName" value="<%= job.contactName || 'contact name'%>" readonly /><br>
+<input id="contactEmail" type="text" name="contactEmail" value="<%= job.contactEmail || 'contact email'%>" readonly /><br>
+<input id="contactPhone" type="text" name="contactPhone" value="<%= job.contactPhone || 'contact phone'%>" readonly /><br>
+<input id="address" type="text" name="address" value="<%= job.address || 'address'%>" readonly /><br>
+<input id="origin" type="text" name="origin" value="<%= job.origin || 'origin'%>" readonly /><br>
+<input id="status" type="text" name="status" value="<%= job.status || 'status'%>" readonly /><br>
+<textarea id="comments" name="comments" rows="10" cols="50" readonly ><%= job.comments || 'comments'%></textarea><br>
+<button id="edit">Edit</button><button id="save">Save</button><button id="delete">Delete</button>
+
+</form>
+
+<%- include('partials/footer'); -%>
+
+<script>
+    const form = document.querySelector('form');
+    const jobTitle = document.getElementById('jobTitle');
+    const companyName = document.getElementById('companyName');
+    const website = document.getElementById('website');
+    const contactName = document.getElementById('contactName');
+    const contactEmail = document.getElementById('contactEmail');
+    const contactPhone = document.getElementById('contactPhone');
+    const address = document.getElementById('address');
+    const origin = document.getElementById('origin');
+    const status = document.getElementById('status');
+    const comments = document.getElementById('comments');
+    const editBtn = document.getElementById('edit');
+    const saveBtn = document.getElementById('save');
+    const deleteBtn = document.getElementById('delete');
+
+    editBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        jobTitle.removeAttribute('readonly');
+        companyName.removeAttribute('readonly');
+        website.removeAttribute('readonly');
+        contactName.removeAttribute('readonly');
+        contactEmail.removeAttribute('readonly');
+        contactPhone.removeAttribute('readonly');
+        address.removeAttribute('readonly');
+        origin.removeAttribute('readonly');
+        status.removeAttribute('readonly');
+        comments.removeAttribute('readonly');
+
+        jobTitle.style.border = "solid 1px";
+        companyName.style.border = "solid 1px";
+        website.style.border = "solid 1px";
+        contactName.style.border = "solid 1px";
+        contactEmail.style.border = "solid 1px";
+        contactPhone.style.border = "solid 1px";
+        address.style.border = "solid 1px";
+        origin.style.border = "solid 1px";
+        status.style.border = "solid 1px";
+        comments.style.border = "solid 1px";
+
+        editBtn.style.display = "none"
+        saveBtn.style.display = "inline-block"
+    });
+
+    saveBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        location.reload();
+    });
+
+    deleteBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+    });
+
+    </script>

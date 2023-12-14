@@ -5,6 +5,7 @@ const authRoutes = require('./routes/authRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
 const cookieParser = require('cookie-parser');
 const { checkUser } = require('./middleware/authMiddleware');
+const dashboardController = require("./controllers/dashboardController");
 
 const app = express();
 
@@ -19,5 +20,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCr
     .then((result) => app.listen(3000))
     .catch((err) => console.log(err));
 
+
 app.get('*', checkUser);
+app.get('/', (req, res) => res.render('home'));
+
 app.use(authRoutes, dashboardRoutes);

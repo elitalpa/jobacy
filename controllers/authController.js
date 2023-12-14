@@ -72,7 +72,6 @@ module.exports.login_post = async (req, res) => {
         const errors = handleErrors(err);
         res.status(400).json({ errors });
     }
-
 }
 
 module.exports.logout_get = (req, res) => {

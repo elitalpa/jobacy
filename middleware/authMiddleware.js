@@ -16,7 +16,18 @@ const requireAuth = (req, res, next) => {
             }
         });
     } else {
-        res.redirect('/login');
+        res.redirect('/');
+    }
+};
+
+const isAuth = (req, res, next) => {
+    const token = req.cookies.jwt;
+
+    if (token) {
+        res.redirect('dashboard');
+        next()
+    } else {
+        next()
     }
 };
 
@@ -45,4 +56,4 @@ const checkUser = (req, res, next) => {
     }
 }
 
-module.exports = { requireAuth, checkUser };
+module.exports = { requireAuth, checkUser, isAuth };

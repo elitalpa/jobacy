@@ -10,6 +10,10 @@ const jobSchema = new Schema({
         type: String,
         required: [true, 'Please enter a job title'],
     },
+    companyName: {
+        type: String,
+        required: [true, 'Please enter a company name'],
+    },
     website: {
         type: String,
     },

@@ -19,7 +19,7 @@ module.exports.dashboard_get = async (req, res) => {
 
         const jobs = await Job.find({"user":user});
 
-        res.render('home', {
+        res.render('dashboard', {
             locals,
             jobs
         });
@@ -37,8 +37,24 @@ module.exports.addJob_get = (req, res) => {
     res.render('addJob');
 }
 
+module.exports.job_get = async (req, res) => {
+
+    const job = await Job.findById({ _id: req.params.id })
+    console.log(job)
+
+    if (job) {
+        res.render("job", {
+            jobId: req.params.id,
+            job,
+        });
+    } else {
+        res.send("Something went wrong.");
+    }
+
+};
+
 module.exports.addJob_post = async (req, res) => {
-    const { jobTitle, website, contactName, contactEmail, contactPhone, address, comments } = req.body;
+    const { jobTitle, companyName, website, contactName, contactEmail, contactPhone, address, comments } = req.body;
 
     const token = req.cookies.jwt;
     const user = jwt.verify(token, jwtSecret, (err, decodedToken) => {
@@ -46,7 +62,7 @@ module.exports.addJob_post = async (req, res) => {
     })
 
     try {
-        const job = await Job.create({ user, jobTitle, website, contactName, contactEmail, contactPhone, address, comments });
+        const job = await Job.create({ user, companyName, jobTitle, website, contactName, contactEmail, contactPhone, address, comments });
         res.status(201).json({ job: job._id });
     }
     catch(err) {

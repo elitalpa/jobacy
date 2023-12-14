@@ -2,3 +2,16 @@
     border: solid 1px;
     width: 400px;
 }
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+#save {
+    display: none;
+}
+
+.updateJob input, .updateJob textarea {
+    border: 0;
+}
