@@ -1,0 +1,7 @@
+#cancelBtn, #saveBtn {
+    display: none;
+}
+
+.viewJobForm {
+    border: 0;
+}

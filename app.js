@@ -1,33 +1,37 @@
 require('dotenv').config();
+
 const express = require('express');
-const mongoose = require('mongoose');
-const authRoutes = require('./routes/authRoutes');
-const dashboardRoutes = require('./routes/dashboardRoutes');
+const methodOverride = require("method-override");
+const connectDB = require('./server/config/db');
 const cookieParser = require('cookie-parser');
-const { checkUser } = require('./middleware/authMiddleware');
-const dashboardController = require("./controllers/dashboardController");
 
 const app = express();
+const port = 3000 || process.env.PORT;
 
-app.use(express.static('public'));
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(methodOverride("_method"));
 app.use(cookieParser());
 
+// Connect to Database
+connectDB();  
+
+// Static Files
+app.use(express.static('public'));
+
+// Templating Engine
 app.set('view engine', 'ejs');
 
-const dbURI = process.env.MONGODB_URI;
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true })
-    .then((result) => app.listen(3000))
-    .catch((err) => console.log(err));
+// Routes
+app.use('/', require('./server/routes/auth'));
+app.use('/', require('./server/routes/index'));
+app.use('/', require('./server/routes/dashboard'));
 
+// Handle 404
+app.get('*', function(req, res) {
+  res.status(404).render('404');
+})
 
-app.get('*', checkUser);
-app.get('/', (req, res) => {
-    const locals = {
-        title: "Jobacy",
-        description: "Keep track of your job applications",
-    }
-    res.render('home', locals)
+app.listen(port, () => {
+  console.log(`App listening on port ${port}`);
 });
-
-app.use(authRoutes, dashboardRoutes);

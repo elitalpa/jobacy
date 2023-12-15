@@ -1,4 +1,4 @@
-<%- include('partials/header'); -%>
+<%- include('../partials/loggedInHeader.ejs'); -%>
 
 <h1>My Profile</h1>
 <ul>
@@ -7,4 +7,4 @@
     <li>Email: <%= user.email %></li>
     <li>gitHub: <a href="https://github.com/<%= user.gitHub %>">github.com/<%= user.gitHub %></a></li>
 </ul>
-<%- include('partials/footer'); -%>
+<%- include('../partials/footer.ejs'); -%>

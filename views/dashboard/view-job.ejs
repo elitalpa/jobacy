@@ -1,0 +1,59 @@
+<%- include('../partials/loggedInHeader.ejs'); -%>
+
+<form action="/dashboard/item/<%= jobID %>?_method=PUT" id="jobForm" method="POST">
+  <label for="jobTitle"></label>
+  <input id="jobTitle" type="text" class="viewJobForm" name="jobTitle" value="<%= job.jobTitle %>" placeholder="jobTitle" required readonly /><br>
+  <label for="companyName"></label>
+  <input id="companyName" type="text" class="viewJobForm" name="companyName" value="<%= job.companyName %>" placeholder="companyName" required readonly /><br>
+  <label for="website"></label>
+  <input id="website" type="text" class="viewJobForm" name="website" value="<%= job.website %>" placeholder="website" readonly/><br>
+  <label for="contactName"></label>
+  <input id="contactName" type="text" class="viewJobForm" name="contactName" value="<%= job.contactName %>" placeholder="contactName" readonly/><br>
+  <label for="contactEmail"></label>
+  <input id="contactEmail" type="text" class="viewJobForm" name="contactEmail" value="<%= job.contactEmail %>" placeholder="contactEmail" readonly/><br>
+  <label for="contactPhone"></label>
+  <input id="contactPhone" type="text" class="viewJobForm" name="contactPhone" value="<%= job.contactPhone %>" placeholder="contactPhone" readonly/><br>
+  <label for="address"></label>
+  <input id="address" type="text" class="viewJobForm" name="address" value="<%= job.address %>" placeholder="address" readonly/><br>
+  <label for="origin"></label>
+  <input id="origin" type="text" class="viewJobForm" name="origin" value="<%= job.origin %>" placeholder="origin" readonly/><br>
+  <label for="status"></label>
+  <input id="status" type="text" class="viewJobForm" name="status" value="<%= job.status %>" placeholder="status" readonly/><br>
+  <label for="comments"></label>
+  <textarea id="comments" class="viewJobForm" name="comments" rows="10" cols="50" readonly placeholder="comments"><%= job.comments %></textarea><br>
+</form>
+
+<form action="/dashboard/item-delete/<%= jobID %>?_method=DELETE" id="deleteForm" method="POST"></form>
+
+<button id="editBtn">Edit</button>
+<button id="deleteBtn" type="submit" form="deleteForm">Delete</button>
+
+<button id="saveBtn" type="submit" form="jobForm">Save</button>
+<button id="cancelBtn">Cancel</button>
+
+<%- include('../partials/footer.ejs'); -%>
+
+<script>
+  const formElements = document.querySelectorAll(".viewJobForm");
+  const editBtn = document.getElementById('editBtn');
+  const deleteBtn = document.getElementById('deleteBtn');
+  const cancelBtn = document.getElementById('cancelBtn');
+  const saveBtn = document.getElementById('saveBtn');
+
+  editBtn.addEventListener('click', (e) => {
+    editBtn.style.display = "none";
+    saveBtn.style.display = "inline-block";
+    deleteBtn.style.display = "none";
+    cancelBtn.style.display = "inline-block";
+
+    for (i = 0; i < formElements.length; ++i) {
+      formElements[i].style.border = "solid 1px";
+      formElements[i].removeAttribute("readonly");
+    }
+  });
+
+  cancelBtn.addEventListener('click', (e) => {
+    location.reload()
+  });
+
+</script>
