@@ -22,6 +22,12 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCr
 
 
 app.get('*', checkUser);
-app.get('/', (req, res) => res.render('home'));
+app.get('/', (req, res) => {
+    const locals = {
+        title: "Jobacy",
+        description: "Keep track of your job applications",
+    }
+    res.render('home', locals)
+});
 
 app.use(authRoutes, dashboardRoutes);

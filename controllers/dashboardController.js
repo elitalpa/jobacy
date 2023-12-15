@@ -1,13 +1,13 @@
-const Job = require("../models/Job");
 const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
+const Job = require("../models/Job");
 const User = require ('../models/User')
+const jwt = require('jsonwebtoken');
 const jwtSecret = process.env.JWT_SECRET;
 
 module.exports.dashboard_get = async (req, res) => {
 
     const locals = {
-        title: "Dashboard",
+        title: "Jobacy - Dashboard",
         description: "Keep track of your job applications",
     }
         const token = req.cookies.jwt;
@@ -25,33 +25,36 @@ module.exports.dashboard_get = async (req, res) => {
         });
 
     } catch (error) {
-
+        console.log(error);
     }
 }
 
 module.exports.myProfile_get = (req, res) => {
-    res.render('myProfile');
+    const locals = {
+        title: "Jobacy - My Profile",
+        description: "Keep track of your job applications",
+    }
+
+    res.render('myProfile', locals);
 }
 
 module.exports.addJob_get = (req, res) => {
-    res.render('addJob');
-}
-
-module.exports.job_get = async (req, res) => {
-
-    const job = await Job.findById({ _id: req.params.id })
-    console.log(job)
-
-    if (job) {
-        res.render("job", {
-            jobId: req.params.id,
-            job,
-        });
-    } else {
-        res.send("Something went wrong.");
+    const locals = {
+        title: "Jobacy - Add Job",
+        description: "Keep track of your job applications",
     }
 
-};
+    res.render('addJob', locals);
+}
+
+module.exports.job_get = (req, res) => {
+    const locals = {
+        title: "Jobacy - View Job",
+        description: "Keep track of your job applications",
+    }
+
+    res.render('job', locals);
+}
 
 module.exports.addJob_post = async (req, res) => {
     const { jobTitle, companyName, website, contactName, contactEmail, contactPhone, address, origin, status, comments } = req.body;

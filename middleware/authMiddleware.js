@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require ('../models/User')
+const Job = require ('../models/Job')
 const jwtSecret = process.env.JWT_SECRET;
 
 const requireAuth = (req, res, next) => {
@@ -56,4 +57,16 @@ const checkUser = (req, res, next) => {
     }
 }
 
-module.exports = { requireAuth, checkUser, isAuth };
+const checkJob = async (req, res, next) => {
+    const jobId = req.params.id;
+
+    if (jobId) {
+        res.locals.job = await Job.findById(jobId);
+        next();
+    } else {
+        console.log('no job')
+        next();
+    }
+}
+
+module.exports = { requireAuth, isAuth, checkUser, checkJob };

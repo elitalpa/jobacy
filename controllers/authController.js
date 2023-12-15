@@ -36,11 +36,19 @@ const createToken = (id) => {
 };
 
 module.exports.signup_get = (req, res) => {
-    res.render('signup');
+    const locals = {
+        title: "Jobacy - Signup",
+        description: "Keep track of your job applications",
+    }
+    res.render('signup', locals);
 }
 
 module.exports.login_get = (req, res) => {
-    res.render('login');
+    const locals = {
+        title: "Jobacy - Login",
+        description: "Keep track of your job applications",
+    }
+    res.render('login', locals);
 }
 
 module.exports.signup_post = async (req, res) => {
