@@ -9,6 +9,6 @@ router.put('/dashboard/item/:id', requireAuth, checkUser, checkJob, dashboardCon
 router.delete('/dashboard/item-delete/:id', requireAuth, checkUser, checkJob, dashboardController.dashboardDeleteJob);
 router.get('/dashboard/add', requireAuth, checkUser, dashboardController.dashboardAddJob);
 router.post('/dashboard/add', requireAuth, checkUser, dashboardController.dashboardAddJobSubmit);
-router.get('/dashboard/myProfile', requireAuth, checkUser, dashboardController.myProfile);
+router.get('/dashboard/myProfile/:id', requireAuth, checkUser, dashboardController.myProfile);
 
 module.exports = router;
