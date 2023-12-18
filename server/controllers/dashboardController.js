@@ -140,20 +140,25 @@ module.exports.changePassword_get = (req, res) => {
   res.render('dashboard/changePassword', locals);
   }
 
-/*
-module.exports.changePassword_put = async (req, res) => {
-  const {password} = req.body;
+///// HANDLE ERRORS FOR PASSWORD CHANGE
 
-  try {
-    const user = await User.findOneAndUpdate(
-        {id: req.params.id},
-        {password});
-    res.status(201).json({user: user._id});
-  } catch (err) {
-    res.status(400).json(err);
+
+const handleErrors = (err) => {
+  console.log(err.message, err.code);
+  let errors = { password: '' };
+
+  if (err.message.includes('User validation failed')) {
+    Object.values(err.errors).forEach(({ properties }) => {
+      errors[properties.path] = properties.message;
+    });
   }
+
+  return errors;
 }
-*/
+
+
+
+/////
 
 
 module.exports.changePassword_put = async (req, res) => {
@@ -161,10 +166,10 @@ module.exports.changePassword_put = async (req, res) => {
     const currentUser = await User.findOne({ _id: req.params.id });
     currentUser.password = req.body.password
     await currentUser.save();
-    res.status(201).json({ user: user._id });
+    res.status(201).json({ user: currentUser._id });
   }
   catch(err) {
-    res.status(400).json(err);
-  }
+    const errors = handleErrors(err);
+    res.status(400).json({ errors });  }
 
 }
