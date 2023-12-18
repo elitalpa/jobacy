@@ -1,6 +1,4 @@
 const Job = require("../models/Job");
-
-const mongoose = require("mongoose");
 const User = require("../models/User");
 
 // GET // DASHBOARD

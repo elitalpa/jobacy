@@ -1,5 +1,6 @@
 <%- include('../partials/loggedInHeader.ejs'); -%>
 
+<a href="/dashboard">back to dashboard</a>
 <form action="/dashboard/item/<%= jobID %>?_method=PUT" id="jobForm" method="POST">
   <label for="jobTitle"></label>
   <input id="jobTitle" type="text" class="viewJobForm" name="jobTitle" value="<%= job.jobTitle %>" placeholder="jobTitle" required disabled /><br>
@@ -40,7 +41,7 @@
   const cancelBtn = document.getElementById('cancelBtn');
   const saveBtn = document.getElementById('saveBtn');
 
-  editBtn.addEventListener('click', (e) => {
+  editBtn.addEventListener('click', () => {
     editBtn.style.display = "none";
     saveBtn.style.display = "inline-block";
     deleteBtn.style.display = "none";
@@ -52,7 +53,7 @@
     }
   });
 
-  cancelBtn.addEventListener('click', (e) => {
+  cancelBtn.addEventListener('click', () => {
     location.reload()
   });
 

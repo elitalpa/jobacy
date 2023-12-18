@@ -1,6 +1,7 @@
 
 <%- include('../partials/loggedInHeader.ejs'); -%>
 
+<a href="/dashboard">back to dashboard</a>
 <h1>My Profile</h1>
 
 <form action="/dashboard/myProfile/<%= user.id %>?_method=PUT" id="profileForm" method="POST">
@@ -37,7 +38,7 @@
     const saveBtn = document.getElementById('saveBtn');
     const gitHubBtn = document.getElementById('gitHubBtn');
 
-    editBtn.addEventListener('click', (e) => {
+    editBtn.addEventListener('click', () => {
         editBtn.style.display = "none";
         saveBtn.style.display = "inline-block";
         cancelBtn.style.display = "inline-block";
@@ -54,7 +55,7 @@
         window.open(`https://github.com/<%= user.gitHub %>`, '_blank').focus();
     });
 
-    cancelBtn.addEventListener('click', (e) => {
+    cancelBtn.addEventListener('click', () => {
         location.reload()
     });
 </script>
