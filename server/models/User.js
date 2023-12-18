@@ -22,7 +22,6 @@ const UserSchema = new Schema({
   gitHub: {
     type: String,
     required: [true, 'Please enter a valid gitHub username'],
-    unique: true,
     lowercase: true,
   },
   password: {
