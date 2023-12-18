@@ -132,33 +132,6 @@ exports.editMyProfile_put = async (req, res) => {
 
 //////////////
 
-const handleErrors = (err) => {
-  console.log(err.message, err.code);
-  let errors = { email: '', password: '' };
-
-  if (err.message === 'incorrect email') {
-    errors.email = 'That email is not registered';
-  }
-
-  if (err.message === 'incorrect password') {
-    errors.password = 'That password is incorrect';
-  }
-
-  if (err.code === 11000) {
-    errors.email = 'that email is already registered';
-    return errors;
-  }
-
-  if (err.message.includes('user validation failed')) {
-    Object.values(err.errors).forEach(({ properties }) => {
-      errors[properties.path] = properties.message;
-    });
-  }
-
-  return errors;
-}
-
-
 module.exports.changePassword_get = (req, res) => {
   const locals = {
     title: "Jobacy - Change Password",
@@ -173,11 +146,10 @@ module.exports.changePassword_put = async (req, res) => {
 
   try {
     const user = await User.findOneAndUpdate(
-        {_id: req.params.id},
+        {id: req.params.id},
         {password});
     res.status(201).json({user: user._id});
   } catch (err) {
-    const errors = handleErrors(err);
-    res.status(400).json({errors});
+    res.status(400).json(err);
   }
 }
