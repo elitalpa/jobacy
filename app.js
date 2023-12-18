@@ -17,9 +17,10 @@ app.use(cookieParser());
 connectDB();  
 
 // Static Files
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 
 // Templating Engine
+app.set("views", __dirname + "/views");
 app.set('view engine', 'ejs');
 
 // Routes
@@ -35,3 +36,5 @@ app.get('*', function(req, res) {
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 });
+
+module.exports = app;
