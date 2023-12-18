@@ -7,31 +7,18 @@ const User = require("../models/User");
 
 exports.dashboard = async (req, res) => {
 
-  let perPage = 12;
-  let page = req.query.page || 1;
-
   const locals = {
     title: "Dashboard",
     description: "Track your job applications",
   };
 
   try {
-    const jobs = await Job.aggregate([
-      { $sort: { updatedAt: -1 } },
-      { $match: { user: locals.id } },
-      ])
-    .skip(perPage * page - perPage)
-    .limit(perPage)
-    .exec();
-
-    const count = await Job.count();
+    const jobs = await Job.find({ user: locals.id })
 
     res.render('dashboard/index', {
       userName: locals.userName,
       locals,
       jobs,
-      current: page,
-      pages: Math.ceil(count / perPage)
     });
 
   } catch (error) {
@@ -126,3 +113,71 @@ exports.dashboardAddJobSubmit = async (req, res) => {
     console.log(error);
   }
 };
+
+exports.editMyProfile_put = async (req, res) => {
+  try {
+    await User.findOneAndUpdate(
+        { _id: req.params.id },
+        { firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          email: req.body.email,
+          gitHub: req.body.gitHub,
+        }
+    ).where({ user: req.user });
+    res.redirect(`/dashboard/myProfile/${req.params.id}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//////////////
+
+const handleErrors = (err) => {
+  console.log(err.message, err.code);
+  let errors = { email: '', password: '' };
+
+  if (err.message === 'incorrect email') {
+    errors.email = 'That email is not registered';
+  }
+
+  if (err.message === 'incorrect password') {
+    errors.password = 'That password is incorrect';
+  }
+
+  if (err.code === 11000) {
+    errors.email = 'that email is already registered';
+    return errors;
+  }
+
+  if (err.message.includes('user validation failed')) {
+    Object.values(err.errors).forEach(({ properties }) => {
+      errors[properties.path] = properties.message;
+    });
+  }
+
+  return errors;
+}
+
+
+module.exports.changePassword_get = (req, res) => {
+  const locals = {
+    title: "Jobacy - Change Password",
+    description: "Keep track of your job applications",
+  }
+  res.render('dashboard/changePassword', locals);
+  }
+
+
+module.exports.changePassword_put = async (req, res) => {
+  const {password} = req.body;
+
+  try {
+    const user = await User.findOneAndUpdate(
+        {_id: req.params.id},
+        {password});
+    res.status(201).json({user: user._id});
+  } catch (err) {
+    const errors = handleErrors(err);
+    res.status(400).json({errors});
+  }
+}

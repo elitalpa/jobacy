@@ -9,3 +9,7 @@
 .myProfileForm {
     border: 0;
 }
+
+input {
+    width: 200px;
+}

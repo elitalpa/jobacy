@@ -2,25 +2,25 @@
 
 <form action="/dashboard/item/<%= jobID %>?_method=PUT" id="jobForm" method="POST">
   <label for="jobTitle"></label>
-  <input id="jobTitle" type="text" class="viewJobForm" name="jobTitle" value="<%= job.jobTitle %>" placeholder="jobTitle" required readonly /><br>
+  <input id="jobTitle" type="text" class="viewJobForm" name="jobTitle" value="<%= job.jobTitle %>" placeholder="jobTitle" required disabled /><br>
   <label for="companyName"></label>
-  <input id="companyName" type="text" class="viewJobForm" name="companyName" value="<%= job.companyName %>" placeholder="companyName" required readonly /><br>
+  <input id="companyName" type="text" class="viewJobForm" name="companyName" value="<%= job.companyName %>" placeholder="companyName" required disabled /><br>
   <label for="website"></label>
-  <input id="website" type="text" class="viewJobForm" name="website" value="<%= job.website %>" placeholder="website" readonly/><br>
+  <input id="website" type="text" class="viewJobForm" name="website" value="<%= job.website %>" placeholder="website" disabled/><br>
   <label for="contactName"></label>
-  <input id="contactName" type="text" class="viewJobForm" name="contactName" value="<%= job.contactName %>" placeholder="contactName" readonly/><br>
+  <input id="contactName" type="text" class="viewJobForm" name="contactName" value="<%= job.contactName %>" placeholder="contactName" disabled/><br>
   <label for="contactEmail"></label>
-  <input id="contactEmail" type="text" class="viewJobForm" name="contactEmail" value="<%= job.contactEmail %>" placeholder="contactEmail" readonly/><br>
+  <input id="contactEmail" type="text" class="viewJobForm" name="contactEmail" value="<%= job.contactEmail %>" placeholder="contactEmail" disabled/><br>
   <label for="contactPhone"></label>
-  <input id="contactPhone" type="text" class="viewJobForm" name="contactPhone" value="<%= job.contactPhone %>" placeholder="contactPhone" readonly/><br>
+  <input id="contactPhone" type="text" class="viewJobForm" name="contactPhone" value="<%= job.contactPhone %>" placeholder="contactPhone" disabled/><br>
   <label for="address"></label>
-  <input id="address" type="text" class="viewJobForm" name="address" value="<%= job.address %>" placeholder="address" readonly/><br>
+  <input id="address" type="text" class="viewJobForm" name="address" value="<%= job.address %>" placeholder="address" disabled/><br>
   <label for="origin"></label>
-  <input id="origin" type="text" class="viewJobForm" name="origin" value="<%= job.origin %>" placeholder="origin" readonly/><br>
+  <input id="origin" type="text" class="viewJobForm" name="origin" value="<%= job.origin %>" placeholder="origin" disabled/><br>
   <label for="status"></label>
-  <input id="status" type="text" class="viewJobForm" name="status" value="<%= job.status %>" placeholder="status" readonly/><br>
+  <input id="status" type="text" class="viewJobForm" name="status" value="<%= job.status %>" placeholder="status" disabled/><br>
   <label for="comments"></label>
-  <textarea id="comments" class="viewJobForm" name="comments" rows="10" cols="50" readonly placeholder="comments"><%= job.comments %></textarea><br>
+  <textarea id="comments" class="viewJobForm" name="comments" rows="10" cols="50" disabled placeholder="comments"><%= job.comments %></textarea><br>
 </form>
 
 <form action="/dashboard/item-delete/<%= jobID %>?_method=DELETE" id="deleteForm" method="POST"></form>
@@ -48,7 +48,7 @@
 
     for (i = 0; i < formElements.length; ++i) {
       formElements[i].style.border = "solid 1px";
-      formElements[i].removeAttribute("readonly");
+      formElements[i].removeAttribute("disabled");
     }
   });
 

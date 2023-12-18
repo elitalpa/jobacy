@@ -3,115 +3,58 @@
 
 <h1>My Profile</h1>
 
-<form action="/dashboard/myProfile/<%= user.id %>">
-    <label for="firstName"></label>
-    <input id="firstName" type="text" class="myProfileForm" name="firstName" value="<%= user.firstName %>" placeholder="First Name" required readonly /><br>
+<form action="/dashboard/myProfile/<%= user.id %>?_method=PUT" id="profileForm" method="POST">
+    <label for="firstName">First Name: </label>
+    <input id="firstName" type="text" class="myProfileForm" name="firstName" value="<%= user.firstName %>" placeholder="First Name" required disabled /><br>
     <div class="firstName error"></div><br>
-    <label for="lastName"></label>
-    <input id="lastName" type="text" class="myProfileForm" name="lastName" value="<%= user.lastName %>" placeholder="Last Name" required readonly /><br>
+    <label for="lastName">Last Name: </label>
+    <input id="lastName" type="text" class="myProfileForm" name="lastName" value="<%= user.lastName %>" placeholder="Last Name" required disabled /><br>
     <div class="lastName error"></div><br>
-    <label for="email"></label>
-    <input id="email" type="text" class="myProfileForm" name="email" value="<%= user.email %>" placeholder="email" readonly/><br>
-    <div class="email error"></div><br>
-    <label for="gitHub"></label>
-    <input id="gitHub" type="text" class="myProfileForm" name="gitHub" value="<%= user.gitHub %>" placeholder="gitHub username" readonly/><br>
+    <label for="email">Email: </label>
+    <input id="email" type="text" class="myProfileForm" name="email" value="<%= user.email %>" placeholder="email" disabled/><br>
+    <div class="email error"><%= locals.emailError %></div><br>
+    <label for="gitHub">GitHub Username: </label>
+    <input id="gitHub" type="text" class="myProfileForm" name="gitHub" value="<%= user.gitHub %>" placeholder="gitHub username" disabled/>
+    <button id="gitHubBtn">Visit your github profile</button><br>
     <div class="gitHub error"></div><br>
-    <label for="password"></label>
-    <input id="password" type="password" class="myProfileForm" name="password" placeholder="New Password" readonly/><br>
-    <div class="password error"></div><br>
-    <label for="repeatPassword"></label>
-    <input id="repeatPassword" type="password" class="myProfileForm" name="password" placeholder="Repeat new password" readonly/><br>
-    <div class="repeatPassword error"></div><br>
 </form>
 
-<form action="/dashboard/profile-delete/<%= user.id %>?_method=DELETE" id="deleteForm" method="POST"></form>
-
-<button id="editBtn">Edit</button>
-<button id="deleteBtn" type="submit" form="profileForm">Delete</button>
-
-<button id="saveBtn" type="submit" form="jobForm">Save</button>
+<button id="editBtn">Edit Personal Data</button>
+<button id="saveBtn" type="submit" form="profileForm">Save</button>
 <button id="cancelBtn">Cancel</button>
 
+<br>
+
+<a href="/dashboard/changePassword/<%= user.id %>">
+    change password
+</a>
 <%- include('../partials/footer.ejs'); -%>
 
 <script>
-    const form = document.querySelector('form');
     const formElements = document.querySelectorAll(".myProfileForm");
-
     const editBtn = document.getElementById('editBtn');
-    const deleteBtn = document.getElementById('deleteBtn');
     const cancelBtn = document.getElementById('cancelBtn');
     const saveBtn = document.getElementById('saveBtn');
-
-    const firstNameError = document.querySelector('.firstName.error');
-    const lastNameError = document.querySelector('.lastName.error');
-    const emailError = document.querySelector('.email.error');
-    const repeatEmailError = document.querySelector('.repeatEmail.error');
-    const gitHubError = document.querySelector('.gitHub.error');
-    const passwordError = document.querySelector('.password.error');
-    const repeatPasswordError = document.querySelector('.repeatPassword.error');
+    const gitHubBtn = document.getElementById('gitHubBtn');
 
     editBtn.addEventListener('click', (e) => {
         editBtn.style.display = "none";
         saveBtn.style.display = "inline-block";
-        deleteBtn.style.display = "none";
         cancelBtn.style.display = "inline-block";
+        gitHubBtn.style.display = "none";
 
         for (i = 0; i < formElements.length; ++i) {
             formElements[i].style.border = "solid 1px";
-            formElements[i].removeAttribute("readonly");
+            formElements[i].removeAttribute("disabled");
         }
+    });
+
+    gitHubBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.open(`https://github.com/${user.gitHub}`, '_blank').focus();
     });
 
     cancelBtn.addEventListener('click', (e) => {
         location.reload()
-    });
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        firstNameError.textContent = '';
-        lastNameError.textContent = '';
-        emailError.textContent = '';
-        repeatEmailError.textContent = '';
-        gitHubError.textContent = '';
-        passwordError.textContent = '';
-        repeatPasswordError.textContent = '';
-
-        const firstName = form.firstName.value;
-        const lastName = form.lastName.value;
-        const email = form.email.value;
-        const repeatEmail = form.repeatEmail.value;
-        const gitHub = form.gitHub.value;
-        const password = form.password.value;
-        const repeatPassword = form.repeatPassword.value;
-
-        if (password !== repeatPassword) {
-            repeatPasswordError.textContent = "Passwords don't match";
-        } else if (email !== repeatEmail){
-            repeatEmailError.textContent = "Emails don't match";
-        } else {
-
-            try {
-                const res = await fetch('/dashboard/myProfile/', {
-                    method: 'PUT',
-                    body: JSON.stringify({ firstName, lastName, email, gitHub, password }),
-                    headers: {'Content-Type': 'application/json'}
-                });
-                const data = await res.json();
-                console.log(data);
-                if (data.errors) {
-                    emailError.textContent = data.errors.email;
-                    passwordError.textContent = data.errors.password;
-                }
-                if (data.user) {
-                    location.assign('dashboard');
-                }
-
-            }
-            catch (err) {
-                console.log(err);
-            }
-        }
     });
 </script>

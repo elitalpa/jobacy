@@ -10,5 +10,8 @@ router.delete('/dashboard/item-delete/:id', requireAuth, checkUser, checkJob, da
 router.get('/dashboard/add', requireAuth, checkUser, dashboardController.dashboardAddJob);
 router.post('/dashboard/add', requireAuth, checkUser, dashboardController.dashboardAddJobSubmit);
 router.get('/dashboard/myProfile/:id', requireAuth, checkUser, dashboardController.myProfile);
+router.put('/dashboard/myProfile/:id', requireAuth, checkUser,dashboardController.editMyProfile_put);
+router.get('/dashboard/changePassword/:id', requireAuth, checkUser,dashboardController.changePassword_get);
+router.put('/dashboard/changePassword/:id', requireAuth, checkUser,dashboardController.changePassword_put);
 
 module.exports = router;
