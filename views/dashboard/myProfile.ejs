@@ -51,7 +51,7 @@
 
     gitHubBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        window.open(`https://github.com/${user.gitHub}`, '_blank').focus();
+        window.open(`https://github.com/<%= user.gitHub %>`, '_blank').focus();
     });
 
     cancelBtn.addEventListener('click', (e) => {

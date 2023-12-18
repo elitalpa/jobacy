@@ -157,10 +157,10 @@ module.exports.changePassword_put = async (req, res) => {
 
 
 module.exports.changePassword_put = async (req, res) => {
-  const { password } = req.body;
-
   try {
-    const user = await User.updateOne({ password });
+    const currentUser = await User.findOne({ _id: req.params.id });
+    currentUser.password = req.body.password
+    await currentUser.save();
     res.status(201).json({ user: user._id });
   }
   catch(err) {
