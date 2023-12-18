@@ -140,7 +140,7 @@ module.exports.changePassword_get = (req, res) => {
   res.render('dashboard/changePassword', locals);
   }
 
-
+/*
 module.exports.changePassword_put = async (req, res) => {
   const {password} = req.body;
 
@@ -152,4 +152,19 @@ module.exports.changePassword_put = async (req, res) => {
   } catch (err) {
     res.status(400).json(err);
   }
+}
+*/
+
+
+module.exports.changePassword_put = async (req, res) => {
+  const { password } = req.body;
+
+  try {
+    const user = await User.updateOne({ password });
+    res.status(201).json({ user: user._id });
+  }
+  catch(err) {
+    res.status(400).json(err);
+  }
+
 }
