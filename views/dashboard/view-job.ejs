@@ -2,25 +2,57 @@
 
 <a href="/dashboard">back to dashboard</a>
 <form action="/dashboard/item/<%= jobID %>?_method=PUT" id="jobForm" method="POST">
-  <label for="jobTitle"></label>
+  <label for="jobTitle">Job Title:</label>
   <input id="jobTitle" type="text" class="viewJobForm" name="jobTitle" value="<%= job.jobTitle %>" placeholder="jobTitle" required disabled /><br>
-  <label for="companyName"></label>
+  <label for="companyName">Company Name:</label>
   <input id="companyName" type="text" class="viewJobForm" name="companyName" value="<%= job.companyName %>" placeholder="companyName" required disabled /><br>
-  <label for="website"></label>
+  <label for="website">Website:</label>
   <input id="website" type="text" class="viewJobForm" name="website" value="<%= job.website %>" placeholder="website" disabled/><br>
-  <label for="contactName"></label>
+  <label for="contactName">Contact Name:</label>
   <input id="contactName" type="text" class="viewJobForm" name="contactName" value="<%= job.contactName %>" placeholder="contactName" disabled/><br>
-  <label for="contactEmail"></label>
+  <label for="contactEmail">Contact Email:</label>
   <input id="contactEmail" type="text" class="viewJobForm" name="contactEmail" value="<%= job.contactEmail %>" placeholder="contactEmail" disabled/><br>
-  <label for="contactPhone"></label>
+  <label for="contactPhone">Contact Phone:</label>
   <input id="contactPhone" type="text" class="viewJobForm" name="contactPhone" value="<%= job.contactPhone %>" placeholder="contactPhone" disabled/><br>
-  <label for="address"></label>
+  <label for="address">Address:</label>
   <input id="address" type="text" class="viewJobForm" name="address" value="<%= job.address %>" placeholder="address" disabled/><br>
-  <label for="origin"></label>
-  <input id="origin" type="text" class="viewJobForm" name="origin" value="<%= job.origin %>" placeholder="origin" disabled/><br>
-  <label for="status"></label>
-  <input id="status" type="text" class="viewJobForm" name="status" value="<%= job.status %>" placeholder="status" disabled/><br>
-  <label for="comments"></label>
+  <label for="origin">Origin:</label>
+  <select id="origin" name="origin" class="viewJobForm" disabled>
+    <option value="candidatureSpontanee"
+      <% if (job.origin === "candidatureSpontanee") { %>
+            selected
+      <% }; %>
+    >Candidature Spontanée</option>
+    <option value="jobOffer"
+      <% if (job.origin === "jobOffer") { %>
+            selected
+      <% }; %>
+    >Job Offer</option>
+  </select><br>
+  <label for="status">Status:</label>
+  <select id="status" name="status" class="viewJobForm" disabled>
+    <option value="interested"
+    <% if (job.status === "interested") { %>
+            selected
+    <% }; %>
+    >Interested</option>
+    <option value="cvSent"
+    <% if (job.status === "cvSent") { %>
+            selected
+    <% }; %>
+    >CV sent</option>
+    <option value="negative" <% if (job.status === "negative") { %>
+            selected
+    <% }; %>
+    >Negative</option>
+    <option value="Interview"
+    <% if (job.status === "Interview") { %>
+            selected
+    <% }; %>
+    >Interview</option>
+  </select><br>
+
+  <label for="comments">Comments:</label>
   <textarea id="comments" class="viewJobForm" name="comments" rows="10" cols="50" disabled placeholder="comments"><%= job.comments %></textarea><br>
 </form>
 

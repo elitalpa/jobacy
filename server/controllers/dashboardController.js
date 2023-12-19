@@ -76,7 +76,7 @@ exports.dashboardUpdateJob = async (req, res) => {
         comments: req.body.comments,
         updatedAt: Date.now() }
     ).where({ user: req.user });
-    res.redirect("/dashboard");
+    res.redirect(`/dashboard/item/${req.params.id}`);
   } catch (error) {
     console.log(error);
   }
