@@ -1,0 +1,15 @@
+#cancelBtn, #saveBtn {
+  display: none;
+}
+
+.viewJobForm {
+  border: 0;
+}
+
+.myProfileForm {
+  border: 0;
+}
+
+input {
+  width: 200px;
+}
