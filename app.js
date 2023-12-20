@@ -4,6 +4,7 @@ const express = require('express');
 const methodOverride = require("method-override");
 const connectDB = require('./server/config/db');
 const cookieParser = require('cookie-parser');
+const { checkUser } = require('./server/middleware/authMiddleware');
 
 const app = express();
 const port = 3000 || process.env.PORT;
@@ -29,7 +30,7 @@ app.use('/', require('./server/routes/index'));
 app.use('/', require('./server/routes/dashboard'));
 
 // Handle 404
-app.get('*', function(req, res) {
+app.get('*', checkUser, function(req, res) {
   res.status(404).render('404');
 })
 
