@@ -801,6 +801,10 @@ select {
   margin: -0.625rem;
 }
 
+.m-16 {
+  margin: 4rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -872,6 +876,10 @@ select {
   max-width: 42rem;
 }
 
+.max-w-7xl {
+  max-width: 80rem;
+}
+
 .items-end {
   align-items: flex-end;
 }
@@ -929,6 +937,11 @@ select {
   border-color: rgb(107 114 128 / 0.1);
 }
 
+.divide-slate-200 > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-opacity: 1;
+  border-color: rgb(226 232 240 / var(--tw-divide-opacity));
+}
+
 .overflow-y-auto {
   overflow-y: auto;
 }
@@ -943,6 +956,15 @@ select {
 
 .border {
   border-width: 1px;
+}
+
+.border-t {
+  border-top-width: 1px;
+}
+
+.border-gray-200 {
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
 
 .bg-indigo-600 {
@@ -1023,6 +1045,11 @@ select {
 .py-1\.5 {
   padding-top: 0.375rem;
   padding-bottom: 0.375rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .text-center {
@@ -1168,6 +1195,11 @@ input {
     padding-bottom: 12rem;
   }
 
+  .sm\:px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
   .sm\:text-6xl {
     font-size: 3.75rem;
     line-height: 1;
@@ -1181,6 +1213,13 @@ input {
 
   .sm\:ring-gray-900\/10 {
     --tw-ring-color: rgb(17 24 39 / 0.1);
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }
 
@@ -1214,5 +1253,12 @@ input {
   .lg\:px-8 {
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .dark\:divide-slate-700 > :not([hidden]) ~ :not([hidden]) {
+    --tw-divide-opacity: 1;
+    border-color: rgb(51 65 85 / var(--tw-divide-opacity));
   }
 }
