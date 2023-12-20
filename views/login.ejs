@@ -3,17 +3,16 @@
 <form action="/signup">
     <h2>Login</h2>
     <label for="email">Email</label>
-    <input type="text" name="email"  />
+    <input id= "email" type="text" name="email"  />
     <div class="email error"></div>
     <label for="password">Password</label>
-    <input type="password" name="password"  />
+    <input id= "password" type="password" name="password"  />
     <div class="password error"></div>
     <button>login</button>
 </form>
 <p>Not yet registered? <a href="/signup" class="btn">Sign up</a></p>
 
 <%- include('partials/footer'); -%>
-
 <script>
     const form = document.querySelector('form');
     const emailError = document.querySelector('.email.error');
@@ -41,7 +40,7 @@
                 passwordError.textContent = data.errors.password;
             }
             if (data.user) {
-                location.assign('/');
+                location.assign('dashboard');
             }
 
         }

@@ -1,25 +1,37 @@
 const jwt = require('jsonwebtoken');
 const User = require ('../models/User')
+const Job = require ('../models/Job')
 const jwtSecret = process.env.JWT_SECRET;
-
 
 const requireAuth = (req, res, next) => {
     const token = req.cookies.jwt;
 
     if (token) {
-        jwt.verify(token, jwtSecret, (err, decodedToken) => {
+        jwt.verify(token, jwtSecret, (err) => {
             if (err) {
                 console.log(err.message);
                 res.redirect('/login');
             } else {
-                console.log(decodedToken);
                 next();
             }
         });
     } else {
-        res.redirect('/login');
+        res.redirect('/');
     }
 };
+
+const isAuth = (req, res, next) => {
+    const token = req.cookies.jwt;
+
+    if (token) {
+        res.redirect('dashboard');
+        next()
+    } else {
+        next()
+    }
+};
+
+
 
 const checkUser = (req, res, next) => {
     const token = req.cookies.jwt;
@@ -31,9 +43,7 @@ const checkUser = (req, res, next) => {
                 res.locals.user = null;
                 next();
             } else {
-                console.log(decodedToken);
-                let user = await User.findById(decodedToken.id);
-                res.locals.user = user;
+                res.locals.user = await User.findById(decodedToken.id);
                 next();
             }
         });
@@ -44,4 +54,16 @@ const checkUser = (req, res, next) => {
     }
 }
 
-module.exports = { requireAuth, checkUser };
+const checkJob = async (req, res, next) => {
+    const jobId = req.params.id;
+
+    if (jobId) {
+        res.locals.job = await Job.findById(jobId);
+        next();
+    } else {
+        console.log('no job')
+        next();
+    }
+}
+
+module.exports = { requireAuth, isAuth, checkUser, checkJob };

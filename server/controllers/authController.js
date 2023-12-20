@@ -19,7 +19,7 @@ const handleErrors = (err) => {
         return errors;
     }
 
-    if (err.message.includes('user validation failed')) {
+    if (err.message.includes('User validation failed')) {
         Object.values(err.errors).forEach(({ properties }) => {
             errors[properties.path] = properties.message;
         });
@@ -36,11 +36,19 @@ const createToken = (id) => {
 };
 
 module.exports.signup_get = (req, res) => {
-    res.render('signup');
+    const locals = {
+        title: "Jobacy - Signup",
+        description: "Keep track of your job applications",
+    }
+    res.render('signup', locals);
 }
 
 module.exports.login_get = (req, res) => {
-    res.render('login');
+    const locals = {
+        title: "Jobacy - Login",
+        description: "Keep track of your job applications",
+    }
+    res.render('login', locals);
 }
 
 module.exports.signup_post = async (req, res) => {
@@ -72,7 +80,6 @@ module.exports.login_post = async (req, res) => {
         const errors = handleErrors(err);
         res.status(400).json({ errors });
     }
-
 }
 
 module.exports.logout_get = (req, res) => {
