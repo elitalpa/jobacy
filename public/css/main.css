@@ -876,6 +876,10 @@ select {
   height: 100vh;
 }
 
+.h-3 {
+  height: 0.75rem;
+}
+
 .w-6 {
   width: 1.5rem;
 }
@@ -886,6 +890,10 @@ select {
 
 .w-full {
   width: 100%;
+}
+
+.w-3 {
+  width: 0.75rem;
 }
 
 .max-w-2xl {
@@ -972,6 +980,10 @@ select {
 
 .rounded-lg {
   border-radius: 0.5rem;
+}
+
+.rounded-full {
+  border-radius: 9999px;
 }
 
 .border {

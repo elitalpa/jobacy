@@ -24,7 +24,7 @@ const isAuth = (req, res, next) => {
     const token = req.cookies.jwt;
 
     if (token) {
-        res.redirect('dashboard');
+        // res.redirect('dashboard');
         next()
     } else {
         next()

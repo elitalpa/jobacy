@@ -7,13 +7,40 @@
     <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-<nav>
-  <h1><a href="/dashboard">Job Tracker</a></h1>
-  <ul>
-    <% if (user) { %>
-      <li>Welcome, <a href="/dashboard/myProfile/<%= user.id %>"><%= user.firstName %></a></li>
+  <header>
+    <nav class="flex items-center justify-between p-6 lg:px-8">
+      <a href="/dashboard" class="text-2xl font-bold">Job Tracker</a>
+      <ul class="flex gap-12">
+        <li><a href="/" class="text-sm font-semibold">Home</a></li>
+        <li><a href="/about" class="text-sm font-semibold">About</a></li>
+      </ul>
+      <ul class="flex gap-3">
+        <%# try { %>
+          <% if (user) { %>
+            <li>Welcome, <a href="/dashboard/myProfile/<%= user.id %>" class="bg-indigo-600 hover:bg-indigo-500 text-white px-2 py-1.5 rounded-full"><%= user.firstName %></a></li>
+            <li><a href="/logout" class="text-sm font-semibold">Log out</a></li>
+          <% } else { %>
+            <li><a href="/signup" class="text-sm font-semibold">Sign up</a></li>
+            <li>
+              <a
+                href="/login"
+                class="rounded-md bg-indigo-600 px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >Log in</a
+              >
+            </li>
+          <% } %>
+        <%# } catch (e) { %>
+          <%# console.log(e.message) %>
+            <!-- <li><a href="/signup" class="text-sm font-semibold">Sign up</a></li>
+            <li>
+              <a
+                href="/login"
+                class="rounded-md bg-indigo-600 px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >Log in</a
+              >
+            </li> -->
+        <%# } %>
+       </ul>
+    </nav>
+  </header>
 
-      <li><a href="/logout">Log out</a></li>
-    <% } %>
-  </ul>
-</nav>
