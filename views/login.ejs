@@ -1,17 +1,22 @@
 <%- include('partials/header'); -%>
 
 <main class="px-6 lg:px-8">
-  <form action="/signup">
-    <h2>Login</h2>
-    <label for="email">Email</label>
-    <input id="email" type="text" name="email" />
-    <div class="email error"></div>
-    <label for="password">Password</label>
-    <input id="password" type="password" name="password" />
-    <div class="password error"></div>
-    <button>login</button>
-  </form>
-  <p>Not yet registered? <a href="/signup" class="btn text-sm font-semibold leading-6 text-gray-900">Sign up</a></p>
+  <div class="grid md:grid-cols-2 grid-cols-1 h-5/6 gap-8">
+    <div class="flex md:items-center md:justify-end items-end justify-center">
+      <form action="/signup" class="max-w-screen-md w-1/2">
+        <h2 class="text-center mb-2 text-lg font-bold text-gray-900 sm:text-xl">Log in</h2>
+        <label for="email" class="mt-6 mb-2 block text-sm font-semibold leading-6 text-gray-900">Email</label>
+        <input id="email" type="text" name="email" class="appearance-none text-slate-900 bg-white rounded-md block w-full px-3 h-10 shadow-sm sm:text-sm focus:outline-none placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500 ring-1 ring-slate-200" />
+        <div class="email error"></div>
+        <label for="password" class="mt-6 mb-2 block text-sm font-semibold leading-6 text-gray-900">Password</label>
+        <input id="password" type="password" name="password" class="appearance-none text-slate-900 bg-white rounded-md block w-full px-3 h-10 shadow-sm sm:text-sm focus:outline-none placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500 ring-1 ring-slate-200" />
+        <div class="password error"></div>
+        <button class="mt-6 inline-flex justify-center rounded-lg text-sm font-semibold py-2.5 px-4 bg-slate-900 text-white hover:bg-slate-700 w-full">login</button>
+      </form>
+    </div>
+    <!-- <p class="text-center my-auto">Not yet registered? <br /><a href="/signup" class="btn text-sm font-semibold leading-6 text-gray-900">Sign up</a></p> -->
+    <p class="flex items-center md:justify-center justify-start flex-col">Not yet registered? <br /><a href="/signup" class="btn text-sm font-semibold leading-6 text-gray-900">Sign up</a></p>
+  </div>
 </main>
 
 <%- include('partials/footer'); -%>
