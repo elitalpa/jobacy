@@ -6,25 +6,25 @@
     <a href="/dashboard" class="text-sm font-semibold leading-6 text-gray-900"><span aria-hidden="true"> &larr;</span> back to dashboard</a>
     <h1 class="mt-6 text-lg font-bold">My Profile</h1>
 
-    <form action="/dashboard/myProfile/<%= user.id %>?_method=PUT" id="profileForm" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+    <form action="/dashboard/myProfile/<%= user.id %>?_method=PUT" id="profileForm" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
         <div>
-            <label class="mt-6 mb-2 block text-sm font-semibold leading-6 text-gray-900" for="firstName">First Name: </label>
+            <label class="mb-2 block text-sm font-semibold leading-6 text-gray-900" for="firstName">First Name: </label>
             <input id="firstName" type="text" class="myProfileForm input-display" name="firstName" value="<%= user.firstName %>" placeholder="First Name" required disabled /><!-- <br /> -->
             <div class="firstName error"></div><!-- <br /> -->
         </div>
         <div>
-            <label class="mt-6 mb-2 block text-sm font-semibold leading-6 text-gray-900" for="lastName">Last Name: </label>
+            <label class="mb-2 block text-sm font-semibold leading-6 text-gray-900" for="lastName">Last Name: </label>
             <input id="lastName" type="text" class="myProfileForm input-display" name="lastName" value="<%= user.lastName %>" placeholder="Last Name" required disabled /><!-- <br /> -->
             <div class="lastName error"></div><!-- <br /> -->
         </div>
         <div>
-            <label class="mt-6 mb-2 block text-sm font-semibold leading-6 text-gray-900" for="email">Email: </label>
+            <label class="mb-2 block text-sm font-semibold leading-6 text-gray-900" for="email">Email: </label>
             <input id="email" type="text" class="myProfileForm input-display" name="email" value="<%= user.email %>" placeholder="email" disabled/><!-- <br /> -->
             <div class="email error"><%= locals.emailError %></div><!-- <br /> -->
         </div>
         <div></div>
         <div>
-            <label class="mt-6 mb-2 block text-sm font-semibold leading-6 text-gray-900" for="gitHub">GitHub Username: </label>
+            <label class="mb-2 block text-sm font-semibold leading-6 text-gray-900" for="gitHub">GitHub Username: </label>
             <input id="gitHub" type="text" class="myProfileForm input-display" name="gitHub" value="<%= user.gitHub %>" placeholder="gitHub username" disabled/>
         </div>
         <div>
