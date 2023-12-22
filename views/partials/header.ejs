@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%- locals.title %></title>
   <meta name="description" content="<%- locals.description %>">
-    <link rel="stylesheet" href="/css/main.css?ver=2">
+    <link rel="stylesheet" href="/css/main.css?ver=3">
 </head>
 <body>
   <header>
@@ -25,7 +25,8 @@
           <% if (user) { %>
             <!-- <li class="flex">Welcome, <a class="flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 text-white h-8 w-8 rounded-full" href="/dashboard/myProfile/<%= user.id %>" ><span><%= user.firstName.charAt(0) %></span></a></li> -->
             <li>Welcome, <a class="font-semibold border-solid border-b hover:border-b-2 border-sky-300" href="/dashboard/myProfile/<%= user.id %>" ><%= user.firstName %></a></li>
-            <li><a href="/logout" class="text-sm font-semibold">Log out</a></li>
+            <!-- <li><a href="/logout" class="text-sm font-semibold">Log out</a></li> -->
+            <li><a href="/logout" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Log out</a></li>
           <% } else { %>
             <li><a href="/signup" class="text-sm font-semibold">Sign up</a></li>
             <li>
@@ -126,7 +127,8 @@
               <% if (user) { %>
                 <!-- <li class="flex">Welcome, <a class="flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 text-white h-8 w-8 rounded-full" href="/dashboard/myProfile/<%= user.id %>" ><span><%= user.firstName.charAt(0) %></span></a></li> -->
                 <li>Welcome, <a class="font-semibold border-solid border-b hover:border-b-2 border-sky-300" href="/dashboard/myProfile/<%= user.id %>" ><%= user.firstName %></a></li>
-                <li><a href="/logout" class="text-sm font-semibold">Log out</a></li>
+                <!-- <li><a href="/logout" class="text-sm font-semibold">Log out</a></li> -->
+                <li><a href="/logout" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Log out</a></li>
               <% } else { %>
                 <li><a href="/signup" class="text-sm font-semibold">Sign up</a></li>
                 <li>
