@@ -11,10 +11,10 @@
 
       
         <%    for(var i=0; i < jobs.length; i++) { %>
-      <li class="group relative rounded-3xl bg-slate-50 p-6  hover:bg-slate-100 ">
+      <li class="group relative rounded-3xl bg-slate-50  hover:bg-slate-100 ">
         <!-- dark:bg-slate-800/80 dark:highlight-white/5 dark:hover:bg-slate-700/50 -->
         <a href="/dashboard/item/<%= jobs[i]._id %>">
-          <div class="job">
+          <div class="job p-6">
             <span class="text-sm"><%= jobs[i].status %></span>
             <h3 class="text-md leading-6 text-slate-900  font-semibold group-hover:text-sky-500 "><%= jobs[i].jobTitle %></h3>
             <!-- dark:text-white dark:group-hover:text-sky-400 -->
