@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -149,18 +150,21 @@
   </header>
   
   <script>
-    // Select the elements
+    // responsive menu
     let openMenuBtn = document.getElementById('menu-button');
     let closeMenuBtn = document.getElementById('close-menu-button');
     let mobileMenu = document.getElementById('mobile-menu');
-   
-    // Add event listener
+
     mobileMenu.classList.add('hidden');
 
-    openMenuBtn.addEventListener('click', function() {
+    openMenuBtn.addEventListener('click', () => {
+      scrollWidth = window.innerWidth - document.documentElement.clientWidth;
+      console.log(scrollWidth)
+      document.documentElement.style.paddingRight = `${scrollWidth}px`;
+
       mobileMenu.classList.remove('hidden');
+      
       document.documentElement.style.overflow = 'hidden';
-      document.documentElement.style.paddingRight = '17px';
     });
 
     closeMenuBtn.addEventListener('click', () => {
@@ -168,4 +172,4 @@
       document.documentElement.style.overflow = '';
       document.documentElement.style.paddingRight = '';
     })
-   </script>
+  </script>
