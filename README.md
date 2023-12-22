@@ -1,24 +1,10 @@
 # jobacy
 
+## Introduction
 > Track your job applications.
 
-## set up
+Designed to simplify and enhance your job application process. This tool helps users track and manage their job applications efficiently, providing a clear overview of each application's status.
 
-```shell
-npm install
-```
+## Getting Started
 
-if nodemon is not installed yet:
-```shell
-npm install -g nodemon
-```
-
-## run
-
-```shell
-npm run dev
-```
-
-```shell
-npm run start
-```
+To try it, visit: [jobacy.vercel.app](https://jobacy.vercel.app/)
