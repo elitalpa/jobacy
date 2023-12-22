@@ -1,6 +1,6 @@
 <%- include('../partials/header.ejs'); -%>
 <main class="px-6 lg:px-8">
-  <section class="mx-auto max-w-2xl my-12">
+  <section class="mx-auto max-w-2xl my-12 flex flex-col gap-6">
     <a href="/dashboard" class="text-sm font-semibold leading-6 text-gray-900"><span aria-hidden="true"> &larr;</span> back to dashboard</a>
     
     <form action="/dashboard/item/<%= jobID %>?_method=PUT" id="jobForm" method="POST">
