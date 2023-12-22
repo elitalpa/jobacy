@@ -1,21 +1,34 @@
 <%- include('../partials/header.ejs'); -%>
 
-<% if (jobs.length > 0) { %>
-  <h2>Your ongoing job applications:</h2>
+<main class="px-6 lg:px-8">
+  <section class="mx-auto max-w-[26rem] sm:max-w-[52.5rem] my-12 px-4 sm:px-6 lg:px-8 lg:max-w-7xl">
+    <a class="mt-6 inline-flex justify-center rounded-lg text-sm font-semibold py-2.5 px-4 text-slate-900 bg-slate-300 hover:bg-slate-400 w-fit" href="/dashboard/add">Add a job</a>
+    <% if (jobs.length > 0) { %>
+      <h2 class="mt-6 text-lg font-bold">Your ongoing job applications:</h2>
+    </section>
+      <ul class="grid max-w-[26rem] sm:max-w-[52.5rem] my-12  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-auto gap-6 lg:gap-y-8 xl:gap-x-8 lg:max-w-7xl px-4 sm:px-6 lg:px-8">
+      <!-- mt-16 sm:mt-20 md:mt-32 -->
 
-  <%    for(var i=0; i < jobs.length; i++) { %>
-
-    <a href="/dashboard/item/<%= jobs[i]._id %>">
-      <div class="job">
-        Job Title: <%= jobs[i].jobTitle %><br>
-        Company Name: <%= jobs[i].companyName %>
-      </div>
-    </a>
-
-    <br>
-<% } } else { %>
-  <h2>Let's start tracking your first job application</h2>
-<% } %>
-<a href="/dashboard/add">Add a job</a>
+      
+        <%    for(var i=0; i < jobs.length; i++) { %>
+      <li class="group relative rounded-3xl bg-slate-50 p-6  hover:bg-slate-100 ">
+        <!-- dark:bg-slate-800/80 dark:highlight-white/5 dark:hover:bg-slate-700/50 -->
+        <a href="/dashboard/item/<%= jobs[i]._id %>">
+          <div class="job">
+            <span class="text-sm"><%= jobs[i].status %></span>
+            <h3 class="text-md leading-6 text-slate-900  font-semibold group-hover:text-sky-500 "><%= jobs[i].jobTitle %></h3>
+            <!-- dark:text-white dark:group-hover:text-sky-400 -->
+            <p><%= jobs[i].companyName %></p>
+          </div>
+        </a>
+      </li>
+    <% } %>
+    
+      </ul>
+    
+    <% } else { %>
+      <h2>Let's start tracking your first job application</h2>
+    <% } %>
+</main>
 
 <%- include('../partials/footer.ejs'); -%>

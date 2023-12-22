@@ -1,46 +1,62 @@
 <%- include('../partials/header.ejs'); -%>
 
-<form action="/dashboard/add" method="POST" class="position-relative">
-  <h2>Add a job</h2>
-  <label for="jobTitle">Job Title</label>
-  <input id="jobTitle" type="text" name="jobTitle" required /><br>
-  <div class="jobTitle error"></div><br>
-  <label for="companyName">Company Name</label>
-  <input id="companyName" type="text" name="companyName" required /><br>
-  <div class="companyName error"></div><br>
-  <label for="website">Website</label>
-  <input id="website" type="url" name="website"/>
-  <div class="website error"></div><br>
-  <label for="contactName">Contact Name</label>
-  <input id="contactName" type="text" name="contactName"/>
-  <div class="contactName error"></div><br>
-  <label for="contactEmail">Contact Email</label>
-  <input id="contactEmail" type="email" name="contactEmail"/>
-  <div class="contactEmail error"></div><br>
-  <label for="contactPhone">Contact Phone</label>
-  <input id="contactPhone" type="number" name="contactPhone"/>
-  <div class="contactPhone error"></div><br>
-  <label for="address">Address</label>
-  <input id="address" type="text" name="address"/>
-  <div class="address error"></div><br>
-  <label for="origin">Origin</label>
-  <select id="origin" name="origin">
-    <option value="candidatureSpontanee">Candidature Spontanée</option>
-    <option value="jobOffer">Job Offer</option>
-  </select>
-  <div class="origin error"></div><br>
-  <label for="status">Status</label>
-  <select id="status" name="status">
-    <option value="interested">Interested</option>
-    <option value="cvSent">CV sent</option>
-    <option value="negative">Negative</option>
-    <option value="Interview">Interview</option>
-  </select>
-  <div class="status error"></div><br>
-  <label for="comments">Comments</label>
-  <textarea id="comments" name="comments" rows="10" cols="50"></textarea>
-  <div class="comments error"></div><br>
-  <button type="submit">Save</button>
-</form>
+<main class="px-6 lg:px-8">
+  <section class="mx-auto max-w-2xl my-12">
+    <form action="/dashboard/add" method="POST" class="position-relative">
+      <h2 class="mt-6 mb-2 text-lg font-bold">Add a job</h2>
+
+      <label class="mt-6 mb-2 block text-sm font-semibold leading-6 text-gray-900" for="jobTitle">Job Title</label>
+      <input class="input-edit" id="jobTitle" type="text" name="jobTitle" required /><br>
+      <div class="jobTitle error"></div><br>
+
+      <label class="mt-6 mb-2 block text-sm font-semibold leading-6 text-gray-900" for="companyName">Company Name</label>
+      <input class="input-edit" id="companyName" type="text" name="companyName" required /><br>
+      <div class="companyName error"></div><br>
+
+      <label class="mt-6 mb-2 block text-sm font-semibold leading-6 text-gray-900" for="website">Website</label>
+      <input class="input-edit" id="website" type="url" name="website"/>
+      <div class="website error"></div><br>
+
+      <label class="mt-6 mb-2 block text-sm font-semibold leading-6 text-gray-900" for="contactName">Contact Name</label>
+      <input class="input-edit" id="contactName" type="text" name="contactName"/>
+      <div class="contactName error"></div><br>
+
+      <label class="mt-6 mb-2 block text-sm font-semibold leading-6 text-gray-900" for="contactEmail">Contact Email</label>
+      <input class="input-edit" id="contactEmail" type="email" name="contactEmail"/>
+      <div class="contactEmail error"></div><br>
+
+      <label class="mt-6 mb-2 block text-sm font-semibold leading-6 text-gray-900" for="contactPhone">Contact Phone</label>
+      <input class="input-edit" id="contactPhone" type="number" name="contactPhone"/>
+      <div class="contactPhone error"></div><br>
+
+      <label class="mt-6 mb-2 block text-sm font-semibold leading-6 text-gray-900" for="address">Address</label>
+      <input class="input-edit" id="address" type="text" name="address"/>
+      <div class="address error"></div><br>
+
+      <label class="mt-6 mb-2 block text-sm font-semibold leading-6 text-gray-900" for="origin">Origin</label>
+      <select id="origin" name="origin">
+        <option value="candidatureSpontanee">Candidature Spontanée</option>
+        <option value="jobOffer">Job Offer</option>
+      </select>
+      <div class="origin error"></div><br>
+
+      <label class="mt-6 mb-2 block text-sm font-semibold leading-6 text-gray-900" for="status">Status</label>
+      <select id="status" name="status" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+        <option value="interested">Interested</option>
+        <option value="cvSent">CV sent</option>
+        <option value="negative">Negative</option>
+        <option value="Interview">Interview</option>
+      </select>
+      <div class="status error"></div><br>
+
+      <label class="mt-6 mb-2 block text-sm font-semibold leading-6 text-gray-900" for="comments">Comments</label>
+      <textarea class="px-3 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6" id="comments" name="comments" rows="10" cols="50"></textarea>
+      <div class="comments error"></div><br>
+
+      <button class="mt-6 inline-flex justify-center rounded-lg text-sm font-semibold py-2.5 px-4 text-green-900 bg-green-200 hover:bg-green-300 w-fit" type="submit">Save</button>
+      <a class="mt-6 inline-flex justify-center rounded-lg text-sm font-semibold py-2.5 px-4 text-red-900 bg-red-200 hover:bg-red-300 w-fit" href="/dashboard">Cancel</a>
+    </form>
+  </section>
+</main>
 
 <%- include('../partials/footer.ejs'); -%>

@@ -2,11 +2,11 @@
 <%- include('../partials/header.ejs'); -%>
 
 <main class="px-6 lg:px-8">
-    <section class="mx-auto max-w-2xl">
-    <a href="/dashboard" class="text-sm font-semibold leading-6 text-gray-900">back to dashboard <span aria-hidden="true">→</span></a>
-    <h1>My Profile</h1>
+  <section class="mx-auto max-w-2xl my-12">
+    <a href="/dashboard" class="text-sm font-semibold leading-6 text-gray-900"><span aria-hidden="true"> &larr;</span> back to dashboard</a>
+    <h1 class="mt-6 text-lg font-bold">My Profile</h1>
 
-    <form action="/dashboard/myProfile/<%= user.id %>?_method=PUT" id="profileForm" method="POST" class="grid grid-cols-2 gap-x-8">
+    <form action="/dashboard/myProfile/<%= user.id %>?_method=PUT" id="profileForm" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
         <div>
             <label class="mt-6 mb-2 block text-sm font-semibold leading-6 text-gray-900" for="firstName">First Name: </label>
             <input id="firstName" type="text" class="myProfileForm input-display" name="firstName" value="<%= user.firstName %>" placeholder="First Name" required disabled /><!-- <br /> -->
@@ -28,7 +28,7 @@
             <input id="gitHub" type="text" class="myProfileForm input-display" name="gitHub" value="<%= user.gitHub %>" placeholder="gitHub username" disabled/>
         </div>
         <div>
-            <button class="mt-6 mb-2 block text-sm font-semibold leading-6 text-gray-900" type="button" id="gitHubBtn">Visit your github profile</button><!-- <br /> -->
+            <button class="text-sm font-semibold leading-6 text-gray-900" type="button" id="gitHubBtn">Visit your github profile <span aria-hidden="true"> &rarr;</span></button><!-- <br /> -->
             <div class="gitHub error"></div><!-- <br /> -->
         </div>
     </form>

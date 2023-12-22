@@ -9,16 +9,22 @@
 <body>
   <header>
     <nav class="flex items-center justify-between p-6 lg:px-8">
-      <a href="/dashboard" class="text-2xl font-bold">Job Tracker</a>
+      <a href="/" class="text-2xl font-bold">Job Tracker</a>
       <ul class="flex gap-12">
         <li><a href="/" class="text-sm font-semibold">Home</a></li>
-        <li><a href="/about" class="text-sm font-semibold">About</a></li>
+        <li><a href="/dashboard" class="text-sm font-semibold">Dashboard</a></li>
+        <% if (user) { %>
+          <li><a href="/dashboard/myProfile/<%= user.id %>" class="text-sm font-semibold">Profile</a></li>
+        <% } else { %>
+          <li><a href="/login" class="text-sm font-semibold">Profile</a></li>
+        <% } %>
+        
       </ul>
       <ul class="flex gap-3">
         <%# try { %>
           <% if (user) { %>
             <!-- <li class="flex">Welcome, <a class="flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 text-white h-8 w-8 rounded-full" href="/dashboard/myProfile/<%= user.id %>" ><span><%= user.firstName.charAt(0) %></span></a></li> -->
-            <li>Welcome, <a  href="/dashboard/myProfile/<%= user.id %>" ><%= user.firstName %></a></li>
+            <li>Welcome, <a class="font-semibold border-solid border-b hover:border-b-2 border-sky-300" href="/dashboard/myProfile/<%= user.id %>" ><%= user.firstName %></a></li>
             <li><a href="/logout" class="text-sm font-semibold">Log out</a></li>
           <% } else { %>
             <li><a href="/signup" class="text-sm font-semibold">Sign up</a></li>
