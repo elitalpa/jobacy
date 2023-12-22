@@ -1,5 +1,8 @@
 const Job = require("../models/Job");
 const User = require("../models/User");
+const jwt = require('jsonwebtoken');
+const jwtSecret = process.env.JWT_SECRET;
+
 
 // GET // DASHBOARD
 
@@ -10,8 +13,13 @@ exports.dashboard = async (req, res) => {
     description: "Track your job applications",
   };
 
+ const token = req.cookies.jwt;
+  const user = jwt.verify(token, jwtSecret, (err, decodedToken) => {
+    return decodedToken.id;
+  })
+
   try {
-    const jobs = await Job.find({ user: locals.id })
+    const jobs = await Job.find({ user: user })
 
     res.render('dashboard/index', {
       userName: locals.userName,
@@ -43,8 +51,13 @@ exports.dashboardViewJob = async (req, res) => {
     description: "Track your job applications",
   };
 
+  const token = req.cookies.jwt;
+  const user = jwt.verify(token, jwtSecret, (err, decodedToken) => {
+    return decodedToken.id;
+  })
+
   const job = await Job.findById({ _id: req.params.id })
-    .where({ user: req.user })
+    .where({ user: user })
     .lean();
 
   if (job) {
@@ -103,14 +116,21 @@ exports.dashboardAddJob = async (req, res) => {
 // POST // ADD JOB
 
 exports.dashboardAddJobSubmit = async (req, res) => {
+  const { companyName, jobTitle, website, contactName, contactEmail, contactPhone, address, comments } = req.body;
+
+  const token = req.cookies.jwt;
+  const user = jwt.verify(token, jwtSecret, (err, decodedToken) => {
+    return decodedToken.id;
+  })
+
   try {
-    req.body.user = req.user;
-    await Job.create(req.body);
-    res.redirect("/dashboard");
-  } catch (error) {
-    console.log(error);
+    await Job.create({ user, companyName, jobTitle, website, contactName, contactEmail, contactPhone, address, comments });
+    res.status(201).redirect('/dashboard');
   }
-};
+  catch(err) {
+    res.status(400).json({ err });
+  }
+}
 
 exports.editMyProfile_put = async (req, res) => {
   try {
