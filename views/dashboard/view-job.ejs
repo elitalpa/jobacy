@@ -3,59 +3,78 @@
   <section class="mx-auto max-w-2xl my-12 flex flex-col gap-6">
     <a href="/dashboard" class="text-sm font-semibold leading-6 text-gray-900"><span aria-hidden="true"> &larr;</span> back to dashboard</a>
     
-    <form action="/dashboard/item/<%= jobID %>?_method=PUT" id="jobForm" method="POST">
-      <label for="jobTitle">Job Title:</label>
-      <input id="jobTitle" type="text" class="viewJobForm" name="jobTitle" value="<%= job.jobTitle %>" placeholder="jobTitle" required disabled /><br>
-      <label for="companyName">Company Name:</label>
-      <input id="companyName" type="text" class="viewJobForm" name="companyName" value="<%= job.companyName %>" placeholder="companyName" required disabled /><br>
-      <label for="website">Website:</label>
-      <input id="website" type="text" class="viewJobForm" name="website" value="<%= job.website %>" placeholder="website" disabled/><br>
-      <label for="contactName">Contact Name:</label>
-      <input id="contactName" type="text" class="viewJobForm" name="contactName" value="<%= job.contactName %>" placeholder="contactName" disabled/><br>
-      <label for="contactEmail">Contact Email:</label>
-      <input id="contactEmail" type="text" class="viewJobForm" name="contactEmail" value="<%= job.contactEmail %>" placeholder="contactEmail" disabled/><br>
-      <label for="contactPhone">Contact Phone:</label>
-      <input id="contactPhone" type="text" class="viewJobForm" name="contactPhone" value="<%= job.contactPhone %>" placeholder="contactPhone" disabled/><br>
-      <label for="address">Address:</label>
-      <input id="address" type="text" class="viewJobForm" name="address" value="<%= job.address %>" placeholder="address" disabled/><br>
-      <label for="origin">Origin:</label>
-      <select id="origin" name="origin" class="viewJobForm" disabled>
-        <option value="candidatureSpontanee"
-          <% if (job.origin === "candidatureSpontanee") { %>
-                selected
+    <form action="/dashboard/item/<%= jobID %>?_method=PUT" id="jobForm" method="POST" class="grid grid-cols-1 gap-y-4">
+      <div>
+        <label class="block text-sm font-semibold leading-6 text-gray-900" for="jobTitle">Job Title:</label>
+        <input id="jobTitle" type="text" class="viewJobForm input-display" name="jobTitle" value="<%= job.jobTitle %>" placeholder="jobTitle" required disabled />
+      </div>
+      <div>
+        <label class="block text-sm font-semibold leading-6 text-gray-900" for="companyName">Company Name:</label>
+        <input id="companyName" type="text" class="viewJobForm input-display" name="companyName" value="<%= job.companyName %>" placeholder="companyName" required disabled />
+      </div>
+      <div>
+        <label class="block text-sm font-semibold leading-6 text-gray-900" for="website">Website:</label>
+        <input id="website" type="text" class="viewJobForm input-display" name="website" value="<%= job.website %>" placeholder="website" disabled/>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold leading-6 text-gray-900" for="contactName">Contact Name:</label>
+        <input id="contactName" type="text" class="viewJobForm input-display" name="contactName" value="<%= job.contactName %>" placeholder="contactName" disabled/>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold leading-6 text-gray-900" for="contactEmail">Contact Email:</label>
+        <input id="contactEmail" type="text" class="viewJobForm input-display" name="contactEmail" value="<%= job.contactEmail %>" placeholder="contactEmail" disabled/>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold leading-6 text-gray-900" for="contactPhone">Contact Phone:</label>
+        <input id="contactPhone" type="text" class="viewJobForm input-display" name="contactPhone" value="<%= job.contactPhone %>" placeholder="contactPhone" disabled/>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold leading-6 text-gray-900" for="address">Address:</label>
+        <input id="address" type="text" class="viewJobForm input-display" name="address" value="<%= job.address %>" placeholder="address" disabled/>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold leading-6 text-gray-900" for="origin">Origin:</label>
+        <select id="origin" name="origin" class="viewJobForm input-display" disabled>
+          <option value="candidatureSpontanee"
+            <% if (job.origin === "candidatureSpontanee") { %>
+                  selected
+            <% }; %>
+          >Candidature Spontanée</option>
+          <option value="jobOffer"
+            <% if (job.origin === "jobOffer") { %>
+                  selected
+            <% }; %>
+          >Job Offer</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold leading-6 text-gray-900" for="status">Status:</label>
+        <select id="status" name="status" class="viewJobForm input-display" disabled>
+          <option value="interested"
+          <% if (job.status === "interested") { %>
+                  selected
           <% }; %>
-        >Candidature Spontanée</option>
-        <option value="jobOffer"
-          <% if (job.origin === "jobOffer") { %>
-                selected
+          >Interested</option>
+          <option value="cvSent"
+          <% if (job.status === "cvSent") { %>
+                  selected
           <% }; %>
-        >Job Offer</option>
-      </select><br>
-      <label for="status">Status:</label>
-      <select id="status" name="status" class="viewJobForm" disabled>
-        <option value="interested"
-        <% if (job.status === "interested") { %>
-                selected
-        <% }; %>
-        >Interested</option>
-        <option value="cvSent"
-        <% if (job.status === "cvSent") { %>
-                selected
-        <% }; %>
-        >CV sent</option>
-        <option value="negative" <% if (job.status === "negative") { %>
-                selected
-        <% }; %>
-        >Negative</option>
-        <option value="Interview"
-        <% if (job.status === "Interview") { %>
-                selected
-        <% }; %>
-        >Interview</option>
-      </select><br>
-
-      <label for="comments">Comments:</label>
-      <textarea id="comments" class="viewJobForm" name="comments" rows="10" cols="50" disabled placeholder="comments"><%= job.comments %></textarea><br>
+          >CV sent</option>
+          <option value="negative" <% if (job.status === "negative") { %>
+                  selected
+          <% }; %>
+          >Negative</option>
+          <option value="Interview"
+          <% if (job.status === "Interview") { %>
+                  selected
+          <% }; %>
+          >Interview</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold leading-6 text-gray-900" for="comments">Comments:</label>
+        <textarea id="comments" class="viewJobForm input-display" name="comments" rows="10" cols="50" disabled placeholder="comments"><%= job.comments %></textarea>
+      </div>
     </form>
 
     <form action="/dashboard/item-delete/<%= jobID %>?_method=DELETE" id="deleteForm" method="POST"></form>
@@ -89,7 +108,8 @@
     cancelBtn.style.display = "inline-block";
 
     for (i = 0; i < formElements.length; ++i) {
-      formElements[i].style.border = "solid 1px";
+      formElements[i].classList.remove("input-display");
+      formElements[i].classList.add("input-edit");
       formElements[i].removeAttribute("disabled");
     }
   });
