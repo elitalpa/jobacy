@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "build": "npx tailwindcss -i ./src/css/input.css -o ./public/css/main.css",
+    "build--watch": "npx tailwindcss -i ./src/css/input.css -o ./public/css/main.css --watch",
     "dev": "nodemon app.js -e js,mjs,cjs,json,scss,ejs",
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
