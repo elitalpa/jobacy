@@ -113,29 +113,30 @@
         </div>
         <div class="mt-6 flow-root">
           <div class="-my-6 divide-y divide-gray-500/10">
-            <div class="space-y-2 py-6">
-              <a
-                href="/"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >Home</a
-              >
-              <a
-                href="/dashboard"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >Dashboard</a
-              >
-              <a
-                href="#about"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >About</a
-              >
-            </div>
-            <div class="py-6">
-              <a
-                href="/login"
-                class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >Log in</a
-              >
+            <ul class="space-y-2 py-6">
+              <li><a href="/" class="text-sm font-semibold">Home</a></li>
+              <li><a href="/dashboard" class="text-sm font-semibold">Dashboard</a></li>
+              <% if (user) { %>
+                <li><a href="/dashboard/myProfile/<%= user.id %>" class="text-sm font-semibold">Profile</a></li>
+              <% } else { %>
+                <li><a href="/login" class="text-sm font-semibold">Profile</a></li>
+              <% } %>
+            </ul>
+            <ul class="py-6 flex flex-col gap-3">
+              <% if (user) { %>
+                <!-- <li class="flex">Welcome, <a class="flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 text-white h-8 w-8 rounded-full" href="/dashboard/myProfile/<%= user.id %>" ><span><%= user.firstName.charAt(0) %></span></a></li> -->
+                <li>Welcome, <a class="font-semibold border-solid border-b hover:border-b-2 border-sky-300" href="/dashboard/myProfile/<%= user.id %>" ><%= user.firstName %></a></li>
+                <li><a href="/logout" class="text-sm font-semibold">Log out</a></li>
+              <% } else { %>
+                <li><a href="/signup" class="text-sm font-semibold">Sign up</a></li>
+                <li>
+                  <a
+                    href="/login"
+                    class="rounded-md bg-indigo-600 px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    >Log in</a
+                  >
+                </li>
+              <% } %>
             </div>
           </div>
         </div>
