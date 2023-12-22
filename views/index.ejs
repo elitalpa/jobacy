@@ -14,9 +14,12 @@
       <div class="mt-10 flex items-center justify-center gap-x-6">
         <% if (user) { %>
           <a
-            href="/dashboard/myProfile/<%= user.id %>"
-            class="w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >my Profile</a
+            href="/dashboard"
+            class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >Dashboard</a
+          >
+          <a href="/dashboard/myProfile/<%= user.id %>" class="text-sm font-semibold leading-6 text-gray-900"
+            >my Profile <span aria-hidden="true">&rarr;</span></a
           >
         <% } else { %>
           <a
